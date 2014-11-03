@@ -6460,10 +6460,10 @@ class TestDataFrame(tm.TestCase, CheckIndexing,
 
     def test_to_csv_wide_frame_formatting(self):
 
-        df=DataFrame(np.random.randn(3, 100000))
+        df=DataFrame(np.random.randn(1, 100001),columns=None,index=None)
         with ensure_clean() as filename:
-            df.to_csv(filename)
-            rs = read_csv(filename,index_col=0)
+            df.to_csv(filename,header=False,index=False)
+            rs = read_csv(filename,header=None)
             assert_frame_equal(rs, df)
 
     def test_to_csv_bug(self):
